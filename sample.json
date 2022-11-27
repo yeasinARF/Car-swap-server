@@ -1,0 +1,100 @@
+[
+    {
+        "name":"Lamborghini Urus",
+        "category_id":"6381bcaaa845a07cbe1fcdd3",
+        "img":"https://i.ytimg.com/vi/Jzg62MZFhrs/maxresdefault.jpg",
+        "location":"Mohammadpur,Dhaka",
+        "resale_price":"TK. 2,30,00000",
+        "original_price":"TK. 4,30,00000",
+        "years_of_use":"3 years",
+        "seller_name":"Afzal Hossain"
+    }
+    ,
+    {
+        "name":" Lamborghini Aventador Ultimae",
+        "category_id":"6381bcaaa845a07cbe1fcdd3",
+        "img":"https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/model_detail/aventador/ultimae_roadster/aven_ulti_rds_og.jpg",
+        "location":"Dhanmondi,Dhaka",
+        "resale_price":"TK. 3,30,00000",
+        "original_price":"TK. 6,30,00000",
+        "years_of_use":"2 years",
+        "seller_name":"Afzal Nabin"
+    }
+    ,
+    {
+        "name":"Lamborghini Huracán EVO",
+        "category_id":"6381bcaaa845a07cbe1fcdd3",
+        "img":"https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/model/huracan/Evo/restyle/3_RP---Huracan-Evo-88.jpg",
+        "location":"Uttora,Dhaka",
+        "resale_price":"TK. 4,30,00000",
+        "original_price":"TK. 7,50,00000",
+        "years_of_use":"2 years",
+        "seller_name":"Rakib Hossain"
+    }
+    ,
+    {
+        "name":"Tesla Model X",
+        "category_id":"6381bcaaa845a07cbe1fcdd4",
+        "img":"https://cdn.pocket-lint.com/r/s/970x/assets/images/144304-cars-review-tesla-model-x-review-lead-image1-vdycmknzck-jpg.webp",
+        "location":"Purbachol,Dhaka",
+        "resale_price":"TK. 4,30,00000",
+        "original_price":"TK. 7,50,00000",
+        "years_of_use":"2 years",
+        "seller_name":"Rafsan Sabab"
+    }
+    ,
+    {
+        "name":" Tesla Model 3",
+        "category_id":"6381bcaaa845a07cbe1fcdd4",
+        "img":"https://tesla-cdn.thron.com/delivery/public/image/tesla/c82315a6-ac99-464a-a753-c26bc0fb647d/bvlatuR/std/1200x628/lhd-model-3-social",
+        "location":"Mirpur,Dhaka",
+        "resale_price":"TK. 4,30,00000",
+        "original_price":"TK. 7,52,00000",
+        "years_of_use":"2 years",
+        "seller_name":"Abdul Karim"
+    }
+    ,
+    {
+        "name":"Tesla Model S",
+        "category_id":"6381bcaaa845a07cbe1fcdd4",
+        "img":"https://www.motortrend.com/uploads/sites/5/2021/06/2021-Tesla-Model-S-Plaid-4.jpg",
+        "location":"Mirpur,Dhaka",
+        "resale_price":"TK. 4,30,00000",
+        "original_price":"TK. 7,50,00000",
+        "years_of_use":"2 years",
+        "seller_name":"Abdul Karim"
+    }
+    ,
+    {
+        "name":"Ferrari F8 Tributo",
+        "category_id":"6381bcaaa845a07cbe1fcdd5",
+        "img":"https://www.carscoops.com/wp-content/uploads/2022/06/Zacoe-Ferrari-F8-Tributo-main.jpg",
+        "location":"Aftab Nagar,Dhaka",
+        "resale_price":"TK. 4,20,00000",
+        "original_price":"TK. 7,51,00000",
+        "years_of_use":"4 years",
+        "seller_name":"Johirul Islam"
+    }
+    ,
+    {
+        "name":"Ferrari SF90 Spider",
+        "category_id":"6381bcaaa845a07cbe1fcdd5",
+        "img":"https://assets.whichcar.com.au/image/private/s--xLGZnsp5--/ar_1.9047619047619047,c_fill,f_auto,g_xy_center,q_auto:good,x_2773,y_2483/c_scale,w_1200/v1/Motor/Reviews/2021_Ferrari_SF90_Spider_Assetto_Fiorano_Grigio_Scuro_Australia_dynamic_front_tunnel_EDewar.jpg",
+        "location":"Mirpur-2,Dhaka",
+        "resale_price":"TK. 4,35,00000",
+        "original_price":"TK. 7,52,00000",
+        "years_of_use":"2 years",
+        "seller_name":"Abdul Hamid"
+    }
+    ,
+    {
+        "name":"Ferrari 296 GTB",
+        "category_id":"6381bcaaa845a07cbe1fcdd5",
+        "img":"https://www.topgear.com/sites/default/files/2022/03/1-Ferrari-296-GTB.jpg",
+        "location":"Mirpur-11,Dhaka",
+        "resale_price":"TK. 4,30,00000",
+        "original_price":"TK. 7,59,00000",
+        "years_of_use":"2 years",
+        "seller_name":"Abdul Karim"
+    }
+]
