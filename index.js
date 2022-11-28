@@ -19,6 +19,7 @@ async function run() {
     try {
         const categoriesCollection = client.db('carSwap').collection('Categories')
         const CarsCollection = client.db('carSwap').collection('cars')
+        const CurrentUserCollection = client.db('carSwap').collection('currentUser')
         // app.post('/jwt', (req, res) => {
         //     const user = req.body
         //     const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECTRET, { expiresIn: '7d' })
@@ -54,18 +55,18 @@ async function run() {
         //     const result = await serviceCollection.insertOne(service);
         //     res.send(result);
         // });
-        // app.post("/reviews", async (req, res) => {
-        //     const review = req.body;
-        //     console.log(review);
-        //     const result = await ReviewCollection.insertOne(review);
-        //     res.send(result);
-        // });
-        // app.get('/reviews', async (req, res) => {
-        //     const query = {}
-        //     const cursor = ReviewCollection.find(query);
-        //     const result = await cursor.toArray();
-        //     res.send(result);
-        // })
+        app.post("/user", async (req, res) => {
+            const user = req.body;
+            const result = await CurrentUserCollection.insertOne(user);
+            res.send(result);
+        });
+        app.get('/user/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = {email:email};
+            const cursor =CurrentUserCollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        })
         // app.get("/reviews/:id", async (req, res) => {
         //     const id = req.params.id;
         //     const query = { service_id: id };
