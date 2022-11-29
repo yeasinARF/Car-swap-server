@@ -60,6 +60,29 @@ async function run() {
             const result = await CurrentUserCollection.insertOne(user);
             res.send(result);
         });
+        app.get('/users/:role', async (req, res) => {
+            const role = req.params.role;
+            const query = {rolePermission:role};
+            const cursor =CurrentUserCollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+        app.get("/users/seller/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const cursor = CurrentUserCollection.find(query);
+            const result = await cursor.toArray();
+            console.log(query);
+            res.send(result);
+        });
+        app.delete("/users/seller/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await CurrentUserCollection.deleteOne(query);
+            console.log(query);
+            res.send(result);
+        });
+        
         app.get('/user/:email', async (req, res) => {
             const email = req.params.email;
             const query = {email:email};
@@ -67,6 +90,9 @@ async function run() {
             const result = await cursor.toArray();
             res.send(result);
         })
+
+        
+
         // app.get("/reviews/:id", async (req, res) => {
         //     const id = req.params.id;
         //     const query = { service_id: id };
