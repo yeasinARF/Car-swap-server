@@ -20,6 +20,7 @@ async function run() {
         const categoriesCollection = client.db('carSwap').collection('Categories')
         const CarsCollection = client.db('carSwap').collection('cars')
         const CurrentUserCollection = client.db('carSwap').collection('currentUser')
+        const ReportedItemsCollection = client.db('carSwap').collection('reportedItems')
         app.get('/categories', async (req, res) => {
             const query = {}
             const cursor = categoriesCollection.find(query);
@@ -73,6 +74,23 @@ async function run() {
             console.log(query);
             res.send(result);
         });
+        // for get buyer  by id
+        app.get("/users/buyer/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const cursor = CurrentUserCollection.find(query);
+            const result = await cursor.toArray();
+            console.log(query);
+            res.send(result);
+        });
+        // specific buyer delete by id
+        app.delete("/users/buyer/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await CurrentUserCollection.deleteOne(query);
+            console.log(query);
+            res.send(result);
+        });
         // get user by mail
         app.get('/user/:email', async (req, res) => {
             const email = req.params.email;
@@ -80,7 +98,13 @@ async function run() {
             const cursor =CurrentUserCollection.find(query);
             const result = await cursor.toArray();
             res.send(result);
-        })
+        });
+        //Reported item insert by id
+        app.post("/reportedItem/:id", async (req, res) => {
+            const id = req.body;
+            const result = await ReportedItemsCollection.insertOne(id);
+            res.send(result);
+        });
     }
 
     finally {
