@@ -43,6 +43,14 @@ async function run() {
             // console.log(query);
             res.send(result);
         });
+        app.get("/car/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const cursor =CarsCollection.find(query);
+            const result = await cursor.toArray();
+            // console.log(query);
+            res.send(result);
+        });
         //insert user to database
         app.post("/user", async (req, res) => {
             const user = req.body;
