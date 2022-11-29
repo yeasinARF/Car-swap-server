@@ -105,6 +105,13 @@ async function run() {
             const result = await ReportedItemsCollection.insertOne(id);
             res.send(result);
         });
+        // get reported items
+        app.get('/reportedItems', async (req, res) => {
+            const query = {};
+            const cursor =ReportedItemsCollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        });
     }
 
     finally {
