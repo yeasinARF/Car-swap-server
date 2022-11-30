@@ -51,6 +51,12 @@ async function run() {
             // console.log(query);
             res.send(result);
         });
+        //insert car to cars collection
+        app.post("/cars", async (req, res) => {
+            const user = req.body;
+            const result = await CarsCollection.insertOne(user);
+            res.send(result);
+        });
         //insert user to database
         app.post("/user", async (req, res) => {
             const user = req.body;
@@ -118,6 +124,31 @@ async function run() {
             const query = {};
             const cursor =ReportedItemsCollection.find(query);
             const result = await cursor.toArray();
+            res.send(result);
+        });
+        //get specific reported items
+        app.get("/reportedItems/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id)};
+            const cursor = ReportedItemsCollection.find(query);
+            const result = await cursor.toArray();
+            console.log(query);
+            res.send(result);
+        });
+        //delete reported item from cars collection
+        app.delete("/car/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await CarsCollection.deleteOne(query);
+            console.log(query);
+            res.send(result);
+        });
+        //delete reported item from reported item collection
+        app.delete("/reportedItems/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id)};
+            const result = await ReportedItemsCollection.deleteOne(query);
+            console.log(query);
             res.send(result);
         });
     }
