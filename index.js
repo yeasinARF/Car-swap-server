@@ -22,6 +22,7 @@ async function run() {
         const CurrentUserCollection = client.db('carSwap').collection('currentUser')
         const ReportedItemsCollection = client.db('carSwap').collection('reportedItems')
         const AdvertiseItemsCollection = client.db('carSwap').collection('advertise')
+        const OrderedItemsCollection = client.db('carSwap').collection('orders')
         app.get('/categories', async (req, res) => {
             const query = {}
             const cursor = categoriesCollection.find(query);
@@ -162,8 +163,8 @@ async function run() {
         });
         //insert advertise item
         app.post("/advertise", async (req, res) => {
-            const user = req.body;
-            const result = await AdvertiseItemsCollection.insertOne(user);
+            const item = req.body;
+            const result = await AdvertiseItemsCollection.insertOne(item);
             res.send(result);
         });
         //get ad items
@@ -173,6 +174,20 @@ async function run() {
             const cursor = AdvertiseItemsCollection.find(query).sort({time:-1});
             const result = await cursor.toArray();
             console.log(query);
+            res.send(result);
+        });
+        //insert order item
+        app.post("/orderItems", async (req, res) => {
+            const item = req.body;
+            const result = await OrderedItemsCollection.insertOne(item);
+            res.send(result);
+        });
+        //get order by email
+        app.get('/orders/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = {email:email};
+            const cursor =OrderedItemsCollection.find(query).sort({time:-1});
+            const result = await cursor.toArray();
             res.send(result);
         });
     }
