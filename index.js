@@ -21,6 +21,7 @@ async function run() {
         const CarsCollection = client.db('carSwap').collection('cars')
         const CurrentUserCollection = client.db('carSwap').collection('currentUser')
         const ReportedItemsCollection = client.db('carSwap').collection('reportedItems')
+        const AdvertiseItemsCollection = client.db('carSwap').collection('advertise')
         app.get('/categories', async (req, res) => {
             const query = {}
             const cursor = categoriesCollection.find(query);
@@ -113,6 +114,14 @@ async function run() {
             const result = await cursor.toArray();
             res.send(result);
         });
+        //get product by email
+        app.get('/products/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = {seller_email:email};
+            const cursor =CarsCollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        });
         //Reported item insert by id
         app.post("/reportedItem/:id", async (req, res) => {
             const id = req.body;
@@ -148,6 +157,21 @@ async function run() {
             const id = req.params.id;
             const query = { _id: ObjectId(id)};
             const result = await ReportedItemsCollection.deleteOne(query);
+            console.log(query);
+            res.send(result);
+        });
+        //insert advertise item
+        app.post("/advertise", async (req, res) => {
+            const user = req.body;
+            const result = await AdvertiseItemsCollection.insertOne(user);
+            res.send(result);
+        });
+        //get ad items
+        app.get("/advertise", async (req, res) => {
+            const id = req.params.id;
+            const query = {};
+            const cursor = AdvertiseItemsCollection.find(query).sort({time:-1});
+            const result = await cursor.toArray();
             console.log(query);
             res.send(result);
         });
