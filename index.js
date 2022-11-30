@@ -38,7 +38,7 @@ async function run() {
         app.get("/cars/:id", async (req, res) => {
             const id = req.params.id;
             const query = { category_id:id};
-            const cursor =CarsCollection.find(query);
+            const cursor =CarsCollection.find(query).sort({time:-1});
             const result = await cursor.toArray();
             // console.log(query);
             res.send(result);
@@ -67,7 +67,7 @@ async function run() {
         app.get('/users/:role', async (req, res) => {
             const role = req.params.role;
             const query = {rolePermission:role};
-            const cursor =CurrentUserCollection.find(query);
+            const cursor =CurrentUserCollection.find(query).sort({time:-1});
             const result = await cursor.toArray();
             res.send(result);
         })
@@ -122,7 +122,7 @@ async function run() {
         // get reported items
         app.get('/reportedItems', async (req, res) => {
             const query = {};
-            const cursor =ReportedItemsCollection.find(query);
+            const cursor =ReportedItemsCollection.find(query).sort({time:-1});
             const result = await cursor.toArray();
             res.send(result);
         });
