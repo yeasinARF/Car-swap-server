@@ -59,6 +59,12 @@ async function run() {
             const result = await CarsCollection.insertOne(user);
             res.send(result);
         });
+        // insert categories 
+        app.post('/categories',async(req,res)=>{
+            const category=req.body;
+            const result=await categoriesCollection.insertOne(category);
+            res.send(result);
+        })
         //insert user to database
         app.post("/user", async (req, res) => {
             const user = req.body;
