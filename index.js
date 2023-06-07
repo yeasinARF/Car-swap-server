@@ -29,18 +29,33 @@ async function run() {
             const result = await cursor.toArray();
             res.send(result);
         })
+        //get get categories by email
+        app.get('/categories/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { seller_email: email };
+            const cursor = categoriesCollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        });
+        // individual seller categories
+        app.get('/categories', async (req, res) => {
+            const query = {}
+            const cursor = categoriesCollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        })
         //all car
         app.get('/cars', async (req, res) => {
             const query = {}
-            const cursor = CarsCollection.find(query);
+            const cursor = CarsCollection.find(query).sort({ time: -1 });
             const result = await cursor.toArray();
             res.send(result);
         })
         //get car by id
         app.get("/cars/:id", async (req, res) => {
             const id = req.params.id;
-            const query = { category_id:id};
-            const cursor =CarsCollection.find(query).sort({time:-1});
+            const query = { category_id: id };
+            const cursor = CarsCollection.find(query).sort({ time: -1 });
             const result = await cursor.toArray();
             // console.log(query);
             res.send(result);
@@ -48,7 +63,7 @@ async function run() {
         app.get("/car/:id", async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
-            const cursor =CarsCollection.find(query);
+            const cursor = CarsCollection.find(query);
             const result = await cursor.toArray();
             // console.log(query);
             res.send(result);
@@ -60,9 +75,9 @@ async function run() {
             res.send(result);
         });
         // insert categories 
-        app.post('/categories',async(req,res)=>{
-            const category=req.body;
-            const result=await categoriesCollection.insertOne(category);
+        app.post('/categories', async (req, res) => {
+            const category = req.body;
+            const result = await categoriesCollection.insertOne(category);
             res.send(result);
         })
         //insert user to database
@@ -74,8 +89,8 @@ async function run() {
         //for get user by role
         app.get('/users/:role', async (req, res) => {
             const role = req.params.role;
-            const query = {rolePermission:role};
-            const cursor =CurrentUserCollection.find(query).sort({time:-1});
+            const query = { rolePermission: role };
+            const cursor = CurrentUserCollection.find(query).sort({ time: -1 });
             const result = await cursor.toArray();
             res.send(result);
         })
@@ -116,16 +131,16 @@ async function run() {
         // get user by mail
         app.get('/user/:email', async (req, res) => {
             const email = req.params.email;
-            const query = {email:email};
-            const cursor =CurrentUserCollection.find(query);
+            const query = { email: email };
+            const cursor = CurrentUserCollection.find(query);
             const result = await cursor.toArray();
             res.send(result);
         });
         //get product by email
         app.get('/products/:email', async (req, res) => {
             const email = req.params.email;
-            const query = {seller_email:email};
-            const cursor =CarsCollection.find(query);
+            const query = { seller_email: email };
+            const cursor = CarsCollection.find(query).sort({ time: -1 });
             const result = await cursor.toArray();
             res.send(result);
         });
@@ -138,14 +153,14 @@ async function run() {
         // get reported items
         app.get('/reportedItems', async (req, res) => {
             const query = {};
-            const cursor =ReportedItemsCollection.find(query).sort({time:-1});
+            const cursor = ReportedItemsCollection.find(query).sort({ time: -1 });
             const result = await cursor.toArray();
             res.send(result);
         });
         //get specific reported items
         app.get("/reportedItems/:id", async (req, res) => {
             const id = req.params.id;
-            const query = { _id: ObjectId(id)};
+            const query = { _id: ObjectId(id) };
             const cursor = ReportedItemsCollection.find(query);
             const result = await cursor.toArray();
             console.log(query);
@@ -162,7 +177,7 @@ async function run() {
         //delete reported item from reported item collection
         app.delete("/reportedItems/:id", async (req, res) => {
             const id = req.params.id;
-            const query = { _id: ObjectId(id)};
+            const query = { _id: ObjectId(id) };
             const result = await ReportedItemsCollection.deleteOne(query);
             console.log(query);
             res.send(result);
@@ -177,9 +192,20 @@ async function run() {
         app.get("/advertise", async (req, res) => {
             const id = req.params.id;
             const query = {};
-            const cursor = AdvertiseItemsCollection.find(query).sort({time:-1});
+            const limit = 6;
+            const cursor = AdvertiseItemsCollection.find(query).sort({ time: -1 }).limit(limit);
             const result = await cursor.toArray();
             console.log(query);
+            res.send(result);
+        });
+        // single ad product 
+
+        app.get("/advertise/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { item_id: id };
+            const cursor = AdvertiseItemsCollection.find(query).sort({ time: -1 });
+            const result = await cursor.toArray();
+            // console.log(query);
             res.send(result);
         });
         //insert order item
@@ -191,9 +217,38 @@ async function run() {
         //get order by email
         app.get('/orders/:email', async (req, res) => {
             const email = req.params.email;
-            const query = {email:email};
-            const cursor =OrderedItemsCollection.find(query).sort({time:-1});
+            const query = { email: email };
+            const cursor = OrderedItemsCollection.find(query).sort({ time: -1 });
             const result = await cursor.toArray();
+            res.send(result);
+        });
+        // get customer order by email
+        app.get('/customerOrder/:email', async (req, res) => {
+            const seller_email = req.params.email;
+            const query = { seller_email: seller_email };
+            const cursor = OrderedItemsCollection.find(query).sort({ time: -1 });
+            const result = await cursor.toArray();
+            res.send(result);
+        });
+        app.get("/customerOrderId/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const cursor = OrderedItemsCollection.find(query);
+            const result = await cursor.toArray();
+            console.log(query);
+            res.send(result);
+        });
+        app.patch("/customerOrderId/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const updatedStatus = req.body;
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: {
+                    payment_status:updatedStatus.payment_status,
+                },
+            };
+            const result = await OrderedItemsCollection.updateOne(query,updateDoc,options);
             res.send(result);
         });
     }
